@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coming Soon</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 600px;
+            width: 100%;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333;
+            font-size: 36px;
+        }
+
+        p {
+            color: #666;
+            font-size: 18px;
+        }
+
+        .countdown {
+            font-size: 48px;
+            font-weight: bold;
+            color: #00b0d4;
+            margin: 20px 0;
+        }
+
+        footer {
+            margin-top: 30px;
+            font-size: 14px;
+            color: #777;
+        }
+
+        footer p {
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>We're Launching Soon!</h1>
+        <p>Stay tuned for something amazing. We are working hard to get everything ready for you!</p>
+
+        <div id="countdown" class="countdown">00:00:00</div>
+
+        <footer>
+            <p>&copy; 2025 Epic Forge Technologies. All rights reserved.</p>
+            <p>Stay connected!</p>
+        </footer>
+    </div>
+
+    <script>
+        // Countdown Timer
+        const countdownElement = document.getElementById('countdown');
+        
+        // Get the current date and time
+        const now = new Date();
+
+        // Set the target date to tomorrow at 4:50 PM
+        const targetDate = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 16, 50, 0, 0); // 4:50 PM today
+
+        // If the target date is already past, set the target to tomorrow at 4:50 PM
+        if (now > targetDate) {
+            targetDate.setDate(now.getDate() + 1); // Add one day if today has passed
+        }
+
+        // Update the countdown every second
+        const interval = setInterval(function() {
+            const timeRemaining = targetDate - new Date();
+
+            if (timeRemaining <= 0) {
+                clearInterval(interval);
+                countdownElement.innerHTML = 'Launch Time!';
+            } else {
+                // Calculate the days, hours, minutes, and seconds left
+                const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+
+                // Display the result
+                countdownElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
